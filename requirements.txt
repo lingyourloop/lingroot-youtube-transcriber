@@ -1,6 +1,2 @@
-flask
-openai
-python-dotenv
-whisper
-yt-dlp
+Flask
 google-cloud-texttospeech
