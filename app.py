@@ -1,6 +1,14 @@
 from flask import Flask, request, jsonify
 from utils import process_youtube_link
 import os
+import base64
+
+# Google TTS için JSON key dosyasını ortam değişkeninden oluştur
+if "GOOGLE_CREDENTIALS_B64" in os.environ:
+    key_data = base64.b64decode(os.environ["GOOGLE_CREDENTIALS_B64"])
+    with open("google-tts-key.json", "wb") as f:
+        f.write(key_data)
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "google-tts-key.json"
 
 app = Flask(__name__)
 
@@ -25,4 +33,5 @@ def transcribe():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000)
+    port = int(os.environ.get("PORT", 8000))
+    app.run(host="0.0.0.0", port=port)
