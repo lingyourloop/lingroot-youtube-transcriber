@@ -1,3 +1,6 @@
+if __name__ != "__main__":
+    exit()  # Render çalıştırıyorsa bu dosya hemen kapansın
+
 import os
 from utils import process_youtube_link, list_google_voices
 
